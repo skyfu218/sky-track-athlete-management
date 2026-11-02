@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#10231c" />
+  <title>田徑選手管理系統</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">S</span><div><strong>SKY TRACK</strong><small>田徑選手管理系統</small></div></div>
+      <nav id="nav">
+        <button class="nav-item active" data-view="dashboard"><span>⌂</span>團隊總覽</button>
+        <button class="nav-item" data-view="athletes"><span>◎</span>選手名單</button>
+        <button class="nav-item" data-view="prescriptions"><span>▤</span>運動處方</button>
+        <button class="nav-item" data-view="logs"><span>✎</span>訓練日誌</button>
+        <button class="nav-item" data-view="jumps"><span>↗</span>跳躍監控</button>
+        <button class="nav-item" data-view="reports"><span>▥</span>整合報告</button>
+      </nav>
+      <div class="side-foot"><span class="status-dot"></span><div><b>本機資料模式</b><small>資料僅儲存在此瀏覽器</small></div></div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <button class="menu-btn" id="menuBtn" aria-label="開啟選單">☰</button>
+        <div><p class="eyebrow" id="todayLabel"></p><h1 id="pageTitle">團隊總覽</h1></div>
+        <div class="top-actions">
+          <label class="athlete-switch">目前選手<select id="globalAthlete"></select></label>
+          <button class="btn ghost" id="exportBtn">匯出備份</button>
+          <button class="btn primary" data-open="quick">＋ 快速新增</button>
+        </div>
+      </header>
+
+      <section class="view active" id="dashboardView">
+        <div class="hero-panel">
+          <div><span class="pill light">COACH COMMAND CENTER</span><h2>早安，教練</h2><p>今天先看恢復狀態，再決定訓練負荷。所有訊號已整合在同一條時間軸。</p></div>
+          <div class="hero-score"><span>團隊準備度</span><strong id="teamReadiness">—</strong><small>依最近日誌與跳躍表現估算</small></div>
+        </div>
+        <div class="kpi-grid" id="kpiGrid"></div>
+        <div class="dashboard-grid">
+          <article class="card span-2"><div class="card-head"><div><span class="section-kicker">PERFORMANCE TREND</span><h3>跳躍表現趨勢</h3></div><select id="metricSelect"><option value="height">跳躍高度</option><option value="rsi">RSI-Mod</option><option value="contact">接觸時間</option></select></div><div id="trendChart" class="chart-wrap"></div></article>
+          <article class="card"><div class="card-head"><div><span class="section-kicker">TODAY</span><h3>今日處方</h3></div><button class="text-btn" data-view-link="prescriptions">查看全部</button></div><div id="todayPrescription"></div></article>
+          <article class="card span-2"><div class="card-head"><div><span class="section-kicker">ATHLETE SIGNALS</span><h3>選手狀態</h3></div><span class="legend"><i></i> 需留意</span></div><div class="table-wrap"><table><thead><tr><th>選手</th><th>項目</th><th>準備度</th><th>今日負荷</th><th>最新跳高</th><th>狀態</th></tr></thead><tbody id="athleteSignals"></tbody></table></div></article>
+          <article class="card"><div class="card-head"><div><span class="section-kicker">TIMELINE</span><h3>最近動態</h3></div></div><div id="activityFeed" class="activity-feed"></div></article>
+        </div>
+      </section>
+
+      <section class="view" id="athletesView"><div class="section-toolbar"><div><span class="section-kicker">ROSTER</span><h2>選手名單</h2><p>管理選手基本資料與專項。</p></div><button class="btn primary" data-open="athlete">＋ 新增選手</button></div><div class="athlete-grid" id="athleteGrid"></div></section>
+
+      <section class="view" id="prescriptionsView"><div class="section-toolbar"><div><span class="section-kicker">TRAINING PLAN</span><h2>運動處方</h2><p>設定訓練內容、強度與教練注意事項。</p></div><button class="btn primary" data-open="prescription">＋ 建立處方</button></div><div class="filter-row"><input id="rxSearch" placeholder="搜尋處方或訓練內容" /><select id="rxStatus"><option value="all">全部狀態</option><option value="pending">待執行</option><option value="done">已完成</option></select></div><div id="prescriptionList" class="stack-list"></div></section>
+
+      <section class="view" id="logsView"><div class="section-toolbar"><div><span class="section-kicker">DAILY LOG</span><h2>訓練日誌</h2><p>記錄訓練量、RPE、恢復與選手回饋。</p></div><button class="btn primary" data-open="log">＋ 新增日誌</button></div><div id="logSummary" class="mini-kpis"></div><div id="logList" class="stack-list"></div></section>
+
+      <section class="view" id="jumpsView">
+        <div class="section-toolbar"><div><span class="section-kicker">JUMP MONITORING</span><h2>每次跳躍監控</h2><p>逐跳登錄，完成一組後保留整段表現與離散程度。</p></div><button class="btn primary" data-open="jump">＋ 開始監控</button></div>
+        <div class="jump-layout"><article class="card"><div class="card-head"><div><span class="section-kicker">LATEST SESSION</span><h3>最近一次測試</h3></div><span class="pill" id="jumpSessionLabel">尚無資料</span></div><div id="jumpSummary" class="jump-summary empty-state">新增一組跳躍監控以開始。</div></article><article class="card span-2"><div class="card-head"><div><span class="section-kicker">EVERY ATTEMPT</span><h3>逐跳紀錄</h3></div><button class="text-btn" id="exportJumpCsv">匯出 CSV</button></div><div id="jumpAttempts" class="attempt-grid"></div></article></div>
+      </section>
+
+      <section class="view" id="reportsView"><div class="section-toolbar"><div><span class="section-kicker">INTEGRATED REPORT</span><h2>選手整合報告</h2><p>把處方、實際訓練與跳躍反應放在同一頁判讀。</p></div><button class="btn ghost" onclick="window.print()">列印 / PDF</button></div><div id="reportContent"></div></section>
+
+      <footer class="site-footer">
+        <div class="footer-brand"><img src="assets/tshst-logo.png" alt="臺灣運動健康科技學會 Logo" /><div><strong>COPYRIGHT © 2026</strong><span>臺灣運動健康科技學會</span><small>Taiwan Society of Sports and Health Technology</small></div></div>
+        <div class="footer-meta"><span>SKY TRACK · 田徑選手管理系統</span><small>版本更新｜2026 年 11 月</small></div>
+      </footer>
+    </main>
+  </div>
+
+  <dialog id="formDialog"><form id="dynamicForm"><div class="dialog-head"><div><span class="section-kicker" id="dialogKicker"></span><h2 id="dialogTitle"></h2></div><button class="icon-btn" type="button" data-close-dialog aria-label="關閉">×</button></div><div id="formFields" class="form-grid"></div><div class="dialog-actions"><button class="btn ghost" type="button" data-close-dialog>取消</button><button class="btn primary" id="saveForm" type="submit">儲存</button></div></form></dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
