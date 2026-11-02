@@ -1,0 +1,14 @@
+{
+  "hosting": {
+    "site": "athlete-track-skyfu218",
+    "public": ".",
+    "ignore": ["firebase.json", ".firebaserc", ".git/**", ".firebase/**", ".gitignore", "README.md", "assets/logos/**", "**/*.log"],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "headers": [
+      {"source": "/index.html", "headers": [{"key": "Cache-Control", "value": "no-cache, no-store, must-revalidate"}]},
+      {"source": "**/*.@(js|css)", "headers": [{"key": "Cache-Control", "value": "public, max-age=300"}]},
+      {"source": "**/*.@(png|jpg|jpeg|svg|webp)", "headers": [{"key": "Cache-Control", "value": "public, max-age=86400"}]}
+    ]
+  }
+}
