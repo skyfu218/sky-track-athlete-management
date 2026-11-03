@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#10231c" />
-  <title>田徑選手管理系統</title>
+  <title>運動員管理系統</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="brand.css" />
   <link rel="stylesheet" href="jump-monitor.css" />
@@ -15,8 +15,8 @@
 <body>
   <section class="login-screen" id="loginScreen" aria-labelledby="loginTitle">
     <div class="login-card">
-      <div class="login-brand"><img src="assets/athlete-track-logo.png" alt="AthleteTrack Logo" /><div><strong>SKY TRACK</strong><span>田徑選手管理系統</span></div></div>
-      <div class="login-copy"><span class="section-kicker">SECURE ACCESS</span><h1 id="loginTitle">登入選手管理系統</h1><p>請輸入隊伍共用帳號與密碼。</p></div>
+      <div class="login-brand"><img src="assets/athlete-track-logo.png" alt="運動員管理系統 Logo" /></div>
+      <div class="login-copy"><span class="section-kicker">SECURE ACCESS</span><h1 id="loginTitle">登入運動員管理系統</h1><p>請輸入隊伍共用帳號與密碼。</p></div>
       <form id="loginForm" class="login-form">
         <label><span>帳號</span><input id="loginAccount" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required /></label>
         <label><span>密碼</span><input id="loginPassword" name="password" type="password" autocomplete="current-password" inputmode="numeric" required /></label>
@@ -29,7 +29,7 @@
 
   <div class="app-shell" id="appShell" hidden>
     <aside class="sidebar">
-      <div class="brand"><img class="product-logo" src="assets/athlete-track-logo.png" alt="AthleteTrack Logo" /><div><strong>SKY TRACK</strong><small>田徑選手管理系統</small></div></div>
+      <div class="brand"><img class="product-logo" src="assets/athlete-track-logo.png" alt="運動員管理系統 Logo" /></div>
       <nav id="nav">
         <button class="nav-item active" data-view="dashboard"><span>⌂</span>團隊總覽</button>
         <button class="nav-item" data-view="athletes"><span>◎</span>選手名單</button>
@@ -60,7 +60,7 @@
         </div>
         <div class="kpi-grid" id="kpiGrid"></div>
         <div class="dashboard-grid">
-          <article class="card span-2"><div class="card-head"><div><span class="section-kicker">PERFORMANCE TREND</span><h3>跳躍表現趨勢</h3></div><select id="metricSelect"><option value="height">跳躍高度</option><option value="rsi">RSI-Mod</option><option value="contact">接觸時間</option></select></div><div id="trendChart" class="chart-wrap"></div></article>
+          <article class="card span-2"><div class="card-head"><div><span class="section-kicker">PERFORMANCE TREND</span><h3>跳躍表現趨勢</h3></div><select id="metricSelect"><option value="sj">SJ</option><option value="cmj" selected>CMJ</option><option value="dj">DJ</option></select></div><div id="trendChart" class="chart-wrap"></div></article>
           <article class="card"><div class="card-head"><div><span class="section-kicker">TODAY</span><h3>今日處方</h3></div><button class="text-btn" data-view-link="prescriptions">查看全部</button></div><div id="todayPrescription"></div></article>
           <article class="card span-2"><div class="card-head"><div><span class="section-kicker">ATHLETE SIGNALS</span><h3>選手狀態</h3></div><span class="legend"><i></i> 需留意</span></div><div class="table-wrap"><table><thead><tr><th>選手</th><th>項目</th><th>準備度</th><th>今日負荷</th><th>最新跳高</th><th>狀態</th></tr></thead><tbody id="athleteSignals"></tbody></table></div></article>
           <article class="card"><div class="card-head"><div><span class="section-kicker">TIMELINE</span><h3>最近動態</h3></div></div><div id="activityFeed" class="activity-feed"></div></article>
@@ -76,7 +76,7 @@
         <div class="log-controls"><label>訓練日期<input type="date" id="logEntryDate" /></label><label>第一層｜訓練時段<select id="logPeriod"><option value="上午訓練">上午訓練</option><option value="下午訓練">下午訓練</option><option value="晚上訓練">晚上訓練</option></select></label><div><b>登錄方式</b><span>每個訓練項目分別輸入時間與 RPE，按「＋新增」後持續疊加；總 AU＝Σ（時間 × RPE）。</span></div></div>
         <div class="log-entry-card"><div class="log-entry-head"><span>選手</span><span>訓練內容項目</span><span>時間 min</span><span>RPE</span><span>單項 AU</span><span>新增</span><span>已加入項目與總 AU</span><span>恢復狀態</span></div><div id="logEntryRows"></div></div>
         <div class="jump-submit-bar"><div><b id="logBatchStatus">尚未加入訓練項目</b><small>新增項目後即保存；可刪除單項，並在相同日期與時段繼續追加。</small></div><button class="btn primary" id="saveLogBatch">儲存恢復狀態</button></div>
-        <article class="card trend-card"><div class="trend-toolbar"><div><span class="section-kicker">INDIVIDUAL TREND</span><h3>個人訓練趨勢</h3></div><div><select id="logTrendMetric"><option value="load">訓練負荷 AU</option><option value="rpe">RPE</option><option value="sleep">睡眠</option><option value="soreness">痠痛</option><option value="mood">心情</option></select><select id="logTrendRange"><option value="7">近 1 週</option><option value="14">近 2 週</option><option value="21">近 3 週</option><option value="month">本月</option><option value="180">近半年</option></select></div></div><div id="logTrendChart" class="personal-trend"></div></article>
+        <article class="card trend-card"><div class="trend-toolbar"><div><span class="section-kicker">INDIVIDUAL TREND</span><h3>個人訓練趨勢</h3></div><div class="trend-filters"><select id="logTrendMetric"><option value="load">訓練負荷 AU</option><option value="rpe">RPE</option><option value="sleep">睡眠</option><option value="soreness">痠痛</option><option value="mood">心情</option></select><select id="logTrendRange"><option value="7">快速查看｜近 1 週</option><option value="14">快速查看｜近 2 週</option><option value="custom">自訂日期區間</option></select><div class="custom-date-range" id="logCustomRange" hidden><label>開始日期<input type="date" id="logTrendStart" /></label><span>至</span><label>結束日期<input type="date" id="logTrendEnd" /></label></div></div></div><div id="logTrendChart" class="personal-trend"></div></article>
       </section>
 
       <section class="view" id="jumpsView">
@@ -92,7 +92,7 @@
 
       <footer class="site-footer">
         <div class="footer-brand"><img src="assets/tshst-logo.png" alt="臺灣運動健康科技學會 Logo" /><div><strong>COPYRIGHT © 2026</strong><span>臺灣運動健康科技學會</span><small>Taiwan Society of Sports and Health Technology</small></div></div>
-        <div class="footer-meta"><span>SKY TRACK · 田徑選手管理系統</span><small>版本更新｜2026 年 11 月</small></div>
+        <div class="footer-meta"><span>運動員管理系統</span><small>版本更新｜2026 年 11 月</small></div>
       </footer>
     </main>
   </div>
