@@ -29,7 +29,7 @@
         <div><p class="eyebrow" id="todayLabel"></p><h1 id="pageTitle">團隊總覽</h1></div>
         <div class="top-actions">
           <label class="athlete-switch">目前選手<select id="globalAthlete"></select></label>
-          <button class="btn ghost" id="exportBtn">匯出備份</button>
+          <button class="btn ghost" id="exportBtn">匯出 Excel 備份</button>
           <button class="btn primary" data-open="quick">＋ 快速新增</button>
         </div>
       </header>
@@ -70,6 +70,7 @@
 
   <dialog id="formDialog"><form id="dynamicForm"><div class="dialog-head"><div><span class="section-kicker" id="dialogKicker"></span><h2 id="dialogTitle"></h2></div><button class="icon-btn" type="button" data-close-dialog aria-label="關閉">×</button></div><div id="formFields" class="form-grid"></div><div class="dialog-actions"><button class="btn ghost" type="button" data-close-dialog>取消</button><button class="btn primary" id="saveForm" type="submit">儲存</button></div></form></dialog>
   <div class="toast" id="toast" role="status"></div>
+  <script src="xlsx.full.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
