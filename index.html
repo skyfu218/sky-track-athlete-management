@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="brand.css" />
   <link rel="stylesheet" href="jump-monitor.css" />
+  <link rel="stylesheet" href="training-monitor.css" />
+  <link rel="stylesheet" href="trend.css" />
 </head>
 <body>
   <div class="app-shell">
@@ -53,7 +55,13 @@
 
       <section class="view" id="prescriptionsView"><div class="section-toolbar"><div><span class="section-kicker">TRAINING PLAN</span><h2>運動處方</h2><p>設定訓練內容、強度與教練注意事項。</p></div><button class="btn primary" data-open="prescription">＋ 建立處方</button></div><div class="filter-row"><input id="rxSearch" placeholder="搜尋處方或訓練內容" /><select id="rxStatus"><option value="all">全部狀態</option><option value="pending">待執行</option><option value="done">已完成</option></select></div><div id="prescriptionList" class="stack-list"></div></section>
 
-      <section class="view" id="logsView"><div class="section-toolbar"><div><span class="section-kicker">DAILY LOG</span><h2>訓練日誌</h2><p>記錄訓練量、RPE、恢復與選手回饋。</p></div><button class="btn primary" data-open="log">＋ 新增日誌</button></div><div id="logSummary" class="mini-kpis"></div><div id="logList" class="stack-list"></div></section>
+      <section class="view" id="logsView">
+        <div class="log-live-hero"><div><span class="live-label"><i></i> DAILY CHECK-IN</span><h2>選手報數，工作人員協助登檔。</h2><p>隊伍助手、助理教練、運科人員或防護員可在同一頁完成全隊訓練與恢復紀錄。</p></div><div class="jump-progress"><strong id="logCompletedCount">0</strong><span id="logProgressLabel">/ 10 完成</span></div></div>
+        <div class="log-controls"><label>訓練日期<input type="date" id="logEntryDate" /></label><div><b>登錄方式</b><span>訓練時間與 RPE 為核心欄位；系統自動計算 session-RPE 負荷。</span></div></div>
+        <div class="log-entry-card"><div class="log-entry-head"><span>選手</span><span>時間 min</span><span>RPE</span><span>負荷 AU</span><span>睡眠 h</span><span>痠痛 1–5</span><span>心情 1–5</span><span>訓練內容</span><span>狀態</span></div><div id="logEntryRows"></div></div>
+        <div class="jump-submit-bar"><div><b id="logBatchStatus">尚未輸入今日紀錄</b><small>可分次儲存；同一位選手同一天再次送出會更新原紀錄。</small></div><button class="btn primary" id="saveLogBatch">完成登錄並儲存</button></div>
+        <article class="card trend-card"><div class="trend-toolbar"><div><span class="section-kicker">INDIVIDUAL TREND</span><h3>個人訓練趨勢</h3></div><div><select id="logTrendMetric"><option value="load">訓練負荷 AU</option><option value="rpe">RPE</option><option value="sleep">睡眠</option><option value="soreness">痠痛</option><option value="mood">心情</option></select><select id="logTrendRange"><option value="7">近 1 週</option><option value="14">近 2 週</option><option value="21">近 3 週</option><option value="month">本月</option><option value="180">近半年</option></select></div></div><div id="logTrendChart" class="personal-trend"></div></article>
+      </section>
 
       <section class="view" id="jumpsView">
         <div class="jump-live-hero"><div><span class="live-label"><i></i> LIVE SESSION</span><h2>報數、輸入、下一位。</h2><p>同一頁完成全隊 SJ 與 CMJ；輸入後自動換算慢速 SSC 增益與離心利用率。</p></div><div class="jump-progress"><strong id="jumpCompletedCount">0</strong><span id="jumpProgressLabel">/ 10 完成</span></div></div>
@@ -61,9 +69,10 @@
         <div class="jump-entry-card"><div class="jump-entry-head"><span>選手</span><span>SJ 蹲跳 cm</span><span>CMJ 反向跳 cm</span><span>Slow SSC cm</span><span>EI</span><span>EUR</span><span>DJ 滯空 s</span><span>DJ 接觸 s</span><span>RSI</span><span>現場狀況</span><span>狀態</span></div><div id="jumpEntryRows"></div></div>
         <div class="jump-submit-bar"><div><b id="jumpBatchStatus">尚未輸入今日數值</b><small>可分次儲存；同一位選手同一天再次送出會更新原紀錄。</small></div><button class="btn primary" id="saveJumpBatch">完成檢測並儲存</button></div>
         <div class="jump-result-grid"><article class="card"><div class="card-head"><div><span class="section-kicker">TEAM RESULT</span><h3>本次團隊摘要</h3></div></div><div id="jumpTeamSummary" class="jump-summary empty-state">輸入 SJ 與 CMJ 後即時顯示。</div></article><article class="card"><div class="card-head"><div><span class="section-kicker">HISTORY</span><h3>已儲存的比較紀錄</h3></div></div><div id="jumpPairHistory" class="jump-history"></div></article></div>
+        <article class="card trend-card"><div class="trend-toolbar"><div><span class="section-kicker">INDIVIDUAL TREND</span><h3>個人跳躍趨勢</h3></div><div><select id="jumpTrendMetric"><option value="sj">SJ</option><option value="cmj">CMJ</option><option value="ei">EI</option><option value="eur">EUR</option><option value="rsi">RSI</option></select><select id="jumpTrendRange"><option value="7">近 1 週</option><option value="14">近 2 週</option><option value="21">近 3 週</option><option value="month">本月</option><option value="180">近半年</option></select></div></div><div id="jumpPersonalTrend" class="personal-trend"></div></article>
       </section>
 
-      <section class="view" id="reportsView"><div class="section-toolbar"><div><span class="section-kicker">INTEGRATED REPORT</span><h2>選手整合報告</h2><p>把處方、實際訓練與跳躍反應放在同一頁判讀。</p></div><button class="btn ghost" onclick="window.print()">列印 / PDF</button></div><div id="reportContent"></div></section>
+      <section class="view" id="reportsView"><div class="section-toolbar"><div><span class="section-kicker">INTEGRATED REPORT</span><h2>選手整合報告</h2><p>把處方、實際訓練與跳躍反應放在同一頁判讀。</p></div><div class="report-actions"><select id="reportRange"><option value="7">近 1 週</option><option value="14">近 2 週</option><option value="21">近 3 週</option><option value="month">本月</option><option value="180">近半年</option></select><button class="btn ghost" onclick="window.print()">列印 / PDF</button></div></div><div id="reportContent"></div></section>
 
       <footer class="site-footer">
         <div class="footer-brand"><img src="assets/tshst-logo.png" alt="臺灣運動健康科技學會 Logo" /><div><strong>COPYRIGHT © 2026</strong><span>臺灣運動健康科技學會</span><small>Taiwan Society of Sports and Health Technology</small></div></div>
