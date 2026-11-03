@@ -7,6 +7,7 @@
   <title>田徑選手管理系統</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="brand.css" />
+  <link rel="stylesheet" href="jump-monitor.css" />
 </head>
 <body>
   <div class="app-shell">
@@ -55,8 +56,11 @@
       <section class="view" id="logsView"><div class="section-toolbar"><div><span class="section-kicker">DAILY LOG</span><h2>訓練日誌</h2><p>記錄訓練量、RPE、恢復與選手回饋。</p></div><button class="btn primary" data-open="log">＋ 新增日誌</button></div><div id="logSummary" class="mini-kpis"></div><div id="logList" class="stack-list"></div></section>
 
       <section class="view" id="jumpsView">
-        <div class="section-toolbar"><div><span class="section-kicker">JUMP MONITORING</span><h2>每次跳躍監控</h2><p>逐跳登錄，完成一組後保留整段表現與離散程度。</p></div><button class="btn primary" data-open="jump">＋ 開始監控</button></div>
-        <div class="jump-layout"><article class="card"><div class="card-head"><div><span class="section-kicker">LATEST SESSION</span><h3>最近一次測試</h3></div><span class="pill" id="jumpSessionLabel">尚無資料</span></div><div id="jumpSummary" class="jump-summary empty-state">新增一組跳躍監控以開始。</div></article><article class="card span-2"><div class="card-head"><div><span class="section-kicker">EVERY ATTEMPT</span><h3>逐跳紀錄</h3></div><button class="text-btn" id="exportJumpCsv">匯出 CSV</button></div><div id="jumpAttempts" class="attempt-grid"></div></article></div>
+        <div class="jump-live-hero"><div><span class="live-label"><i></i> LIVE SESSION</span><h2>報數、輸入、下一位。</h2><p>同一頁完成全隊 SJ 與 CMJ；輸入後自動換算慢速 SSC 增益與離心利用率。</p></div><div class="jump-progress"><strong id="jumpCompletedCount">0</strong><span id="jumpProgressLabel">/ 10 完成</span></div></div>
+        <div class="jump-controls"><label>檢測日期<input type="date" id="jumpTestDate" /></label><div class="jump-formula-note"><b>填寫順序</b><span>SJ 蹲跳 → CMJ 反向跳 → 自動換算</span></div><button class="btn ghost" id="exportJumpCsv">匯出跳躍 CSV</button></div>
+        <div class="jump-entry-card"><div class="jump-entry-head"><span>選手</span><span>SJ 蹲跳 cm</span><span>CMJ 反向跳 cm</span><span>高度差</span><span>慢速 SSC 增益</span><span>離心利用率／彈性指數</span><span>現場狀況</span><span>狀態</span></div><div id="jumpEntryRows"></div></div>
+        <div class="jump-submit-bar"><div><b id="jumpBatchStatus">尚未輸入今日數值</b><small>可分次儲存；同一位選手同一天再次送出會更新原紀錄。</small></div><button class="btn primary" id="saveJumpBatch">完成檢測並儲存</button></div>
+        <div class="jump-result-grid"><article class="card"><div class="card-head"><div><span class="section-kicker">TEAM RESULT</span><h3>本次團隊摘要</h3></div></div><div id="jumpTeamSummary" class="jump-summary empty-state">輸入 SJ 與 CMJ 後即時顯示。</div></article><article class="card"><div class="card-head"><div><span class="section-kicker">HISTORY</span><h3>已儲存的比較紀錄</h3></div></div><div id="jumpPairHistory" class="jump-history"></div></article></div>
       </section>
 
       <section class="view" id="reportsView"><div class="section-toolbar"><div><span class="section-kicker">INTEGRATED REPORT</span><h2>選手整合報告</h2><p>把處方、實際訓練與跳躍反應放在同一頁判讀。</p></div><button class="btn ghost" onclick="window.print()">列印 / PDF</button></div><div id="reportContent"></div></section>
