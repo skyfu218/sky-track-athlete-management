@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "athlete-track-skyfu218",
+    "site": "athletetrack-skyfu218",
     "public": ".",
     "ignore": ["firebase.json", ".firebaserc", ".git/**", ".firebase/**", ".gitignore", "README.md", "assets/logos/**", "**/*.log"],
     "cleanUrls": true,
