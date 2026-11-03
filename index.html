@@ -10,9 +10,24 @@
   <link rel="stylesheet" href="jump-monitor.css" />
   <link rel="stylesheet" href="training-monitor.css" />
   <link rel="stylesheet" href="trend.css" />
+  <link rel="stylesheet" href="login.css" />
 </head>
 <body>
-  <div class="app-shell">
+  <section class="login-screen" id="loginScreen" aria-labelledby="loginTitle">
+    <div class="login-card">
+      <div class="login-brand"><img src="assets/athlete-track-logo.png" alt="AthleteTrack Logo" /><div><strong>SKY TRACK</strong><span>田徑選手管理系統</span></div></div>
+      <div class="login-copy"><span class="section-kicker">SECURE ACCESS</span><h1 id="loginTitle">登入選手管理系統</h1><p>請輸入隊伍共用帳號與密碼。</p></div>
+      <form id="loginForm" class="login-form">
+        <label><span>帳號</span><input id="loginAccount" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required /></label>
+        <label><span>密碼</span><input id="loginPassword" name="password" type="password" autocomplete="current-password" inputmode="numeric" required /></label>
+        <p class="login-error" id="loginError" role="alert" aria-live="polite"></p>
+        <button class="btn primary" type="submit">登入系統</button>
+      </form>
+      <small class="login-note">登入狀態只保留在目前瀏覽器分頁；關閉分頁後需重新登入。</small>
+    </div>
+  </section>
+
+  <div class="app-shell" id="appShell" hidden>
     <aside class="sidebar">
       <div class="brand"><img class="product-logo" src="assets/athlete-track-logo.png" alt="AthleteTrack Logo" /><div><strong>SKY TRACK</strong><small>田徑選手管理系統</small></div></div>
       <nav id="nav">
@@ -33,6 +48,7 @@
         <div class="top-actions">
           <label class="athlete-switch">目前選手<select id="globalAthlete"></select></label>
           <button class="btn ghost" id="exportBtn">匯出 Excel 備份</button>
+          <button class="btn ghost logout-btn" id="logoutBtn">登出</button>
           <button class="btn primary" data-open="quick">＋ 快速新增</button>
         </div>
       </header>
