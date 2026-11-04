@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#10231c" />
   <title>運動員管理系統</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="brand.css" />
+  <link rel="stylesheet" href="brand.css?v=20261104-logo" />
   <link rel="stylesheet" href="jump-monitor.css" />
   <link rel="stylesheet" href="training-monitor.css" />
   <link rel="stylesheet" href="trend.css" />
@@ -44,6 +44,7 @@
     <main>
       <header class="topbar">
         <button class="menu-btn" id="menuBtn" aria-label="開啟選單">☰</button>
+        <img class="topbar-logo" src="assets/athlete-track-logo.png" alt="運動員管理系統 Logo" />
         <div><p class="eyebrow" id="todayLabel"></p><h1 id="pageTitle">團隊總覽</h1></div>
         <div class="top-actions">
           <label class="athlete-switch">目前選手<select id="globalAthlete"></select></label>
@@ -60,7 +61,7 @@
         </div>
         <div class="kpi-grid" id="kpiGrid"></div>
         <div class="dashboard-grid">
-          <article class="card span-2"><div class="card-head"><div><span class="section-kicker">PERFORMANCE TREND</span><h3>跳躍表現趨勢</h3></div><select id="metricSelect"><option value="sj">SJ</option><option value="cmj" selected>CMJ</option><option value="dj">DJ</option></select></div><div id="trendChart" class="chart-wrap"></div></article>
+          <article class="card span-2"><div class="card-head"><div><span class="section-kicker">PERFORMANCE TREND</span><h3>跳躍表現趨勢</h3></div><select id="metricSelect"><option value="sj">蹲踞跳 (Squat Jump, SJ)</option><option value="cmj" selected>下蹲跳 (Countermovement Jump, CMJ)</option><option value="dj">落下跳 (Drop Jump, DJ)</option></select></div><div id="trendChart" class="chart-wrap"></div></article>
           <article class="card"><div class="card-head"><div><span class="section-kicker">TODAY</span><h3>今日處方</h3></div><button class="text-btn" data-view-link="prescriptions">查看全部</button></div><div id="todayPrescription"></div></article>
           <article class="card span-2"><div class="card-head"><div><span class="section-kicker">ATHLETE SIGNALS</span><h3>選手狀態</h3></div><span class="legend"><i></i> 需留意</span></div><div class="table-wrap"><table><thead><tr><th>選手</th><th>項目</th><th>準備度</th><th>今日負荷</th><th>最新跳高</th><th>狀態</th></tr></thead><tbody id="athleteSignals"></tbody></table></div></article>
           <article class="card"><div class="card-head"><div><span class="section-kicker">TIMELINE</span><h3>最近動態</h3></div></div><div id="activityFeed" class="activity-feed"></div></article>
@@ -80,19 +81,19 @@
       </section>
 
       <section class="view" id="jumpsView">
-        <div class="jump-live-hero"><div><span class="live-label"><i></i> LIVE SESSION</span><h2>報數、輸入、下一位。</h2><p>同一頁完成全隊 SJ 與 CMJ；輸入後自動換算慢速 SSC 增益與離心利用率。</p></div><div class="jump-progress"><strong id="jumpCompletedCount">0</strong><span id="jumpProgressLabel">/ 10 完成</span></div></div>
-        <div class="jump-controls"><label>檢測日期<input type="date" id="jumpTestDate" /></label><div class="jump-formula-note"><b>計算公式</b><div class="jump-formulas"><span><strong>高度差／Slow SSC</strong> CMJ − SJ</span><span><strong>EI 彈性指數</strong> (CMJ − SJ) ÷ SJ</span><span><strong>EUR 離心利用率</strong> CMJ ÷ SJ</span><span><strong>RSI 反應肌力指數</strong> Flight Time ÷ Ground Contact Time</span></div></div><button class="btn ghost" id="exportJumpCsv">匯出跳躍 CSV</button></div>
-        <div class="jump-entry-card"><div class="jump-entry-head"><span>選手</span><span>SJ 蹲跳 cm</span><span>CMJ 反向跳 cm</span><span>Slow SSC cm</span><span>EI</span><span>EUR</span><span>DJ 滯空 s</span><span>DJ 接觸 s</span><span>RSI</span><span>現場狀況</span><span>狀態</span></div><div id="jumpEntryRows"></div></div>
+        <div class="jump-live-hero"><div><span class="live-label"><i></i> LIVE SESSION</span><h2>報數、輸入、下一位。</h2><p>同一頁完成全隊蹲踞跳 (Squat Jump, SJ) 與下蹲跳 (Countermovement Jump, CMJ)；輸入後自動換算慢速伸展－收縮循環、彈性指數與離心利用率。</p></div><div class="jump-progress"><strong id="jumpCompletedCount">0</strong><span id="jumpProgressLabel">/ 10 完成</span></div></div>
+        <div class="jump-controls"><label>檢測日期<input type="date" id="jumpTestDate" /></label><div class="jump-formula-note"><b>計算公式</b><div class="jump-formulas"><span><strong>慢速伸展－收縮循環 (Slow Stretch-Shortening Cycle, Slow SSC)</strong> CMJ − SJ</span><span><strong>彈性指數 (Elasticity Index, EI)</strong> (CMJ − SJ) ÷ SJ</span><span><strong>離心利用率 (Eccentric Utilization Ratio, EUR)</strong> CMJ ÷ SJ</span><span><strong>反應肌力指數 (Reactive Strength Index, RSI)</strong> 滯空時間 (Flight Time) ÷ 地面接觸時間 (Ground Contact Time)</span></div></div><button class="btn ghost" id="exportJumpCsv">匯出跳躍 CSV</button></div>
+        <div class="jump-entry-card"><div class="jump-entry-head"><span>選手</span><span>蹲踞跳 (Squat Jump, SJ) cm</span><span>下蹲跳 (Countermovement Jump, CMJ) cm</span><span>慢速伸展－收縮循環 (Slow SSC) cm</span><span>彈性指數 (EI)</span><span>離心利用率 (EUR)</span><span>落下跳 (Drop Jump, DJ) 滯空 s</span><span>落下跳 (DJ) 接觸 s</span><span>反應肌力指數 (RSI)</span><span>現場狀況</span><span>狀態</span></div><div id="jumpEntryRows"></div></div>
         <div class="jump-submit-bar"><div><b id="jumpBatchStatus">尚未輸入今日數值</b><small>可分次儲存；同一位選手同一天再次送出會更新原紀錄。</small></div><button class="btn primary" id="saveJumpBatch">完成檢測並儲存</button></div>
         <div class="jump-result-grid"><article class="card"><div class="card-head"><div><span class="section-kicker">TEAM RESULT</span><h3>本次團隊摘要</h3></div></div><div id="jumpTeamSummary" class="jump-summary empty-state">輸入 SJ 與 CMJ 後即時顯示。</div></article><article class="card"><div class="card-head"><div><span class="section-kicker">HISTORY</span><h3>已儲存的比較紀錄</h3></div></div><div id="jumpPairHistory" class="jump-history"></div></article></div>
-        <article class="card trend-card"><div class="trend-toolbar"><div><span class="section-kicker">INDIVIDUAL TREND</span><h3>個人跳躍趨勢</h3></div><div><select id="jumpTrendMetric"><option value="sj">SJ</option><option value="cmj">CMJ</option><option value="ei">EI</option><option value="eur">EUR</option><option value="rsi">RSI</option></select><select id="jumpTrendRange"><option value="7">近 1 週</option><option value="14">近 2 週</option><option value="21">近 3 週</option><option value="month">本月</option><option value="180">近半年</option></select></div></div><div id="jumpPersonalTrend" class="personal-trend"></div></article>
+        <article class="card trend-card"><div class="trend-toolbar"><div><span class="section-kicker">INDIVIDUAL TREND</span><h3>個人數據趨勢</h3><p class="trend-description">選擇選手、資料來源與日期區間，分析個人的訓練與跳躍變化。</p></div><div class="trend-filters"><label class="trend-filter-label">選手<select id="personalTrendAthlete"></select></label><label class="trend-filter-label">資料來源<select id="personalTrendSource"><option value="jump">跳躍監控</option><option value="log">訓練日誌</option></select></label><label class="trend-filter-label">分析指標<select id="personalTrendMetric"></select></label><label class="trend-filter-label">日期區間<select id="personalTrendRange"><option value="7">快速查看｜近 1 週</option><option value="14">快速查看｜近 2 週</option><option value="custom">自訂日期區間</option></select></label><div class="custom-date-range" id="personalCustomRange" hidden><label>開始日期<input type="date" id="personalTrendStart" /></label><span>至</span><label>結束日期<input type="date" id="personalTrendEnd" /></label></div></div></div><div id="jumpPersonalTrend" class="personal-trend"></div></article>
       </section>
 
       <section class="view" id="reportsView"><div class="section-toolbar"><div><span class="section-kicker">INTEGRATED REPORT</span><h2>選手整合報告</h2><p>把處方、實際訓練與跳躍反應放在同一頁判讀。</p></div><div class="report-actions"><select id="reportRange"><option value="7">近 1 週</option><option value="14">近 2 週</option><option value="21">近 3 週</option><option value="month">本月</option><option value="180">近半年</option></select><button class="btn ghost" onclick="window.print()">列印 / PDF</button></div></div><div id="reportContent"></div></section>
 
       <footer class="site-footer">
         <div class="footer-brand"><img src="assets/tshst-logo.png" alt="臺灣運動健康科技學會 Logo" /><div><strong>COPYRIGHT © 2026</strong><span>臺灣運動健康科技學會</span><small>Taiwan Society of Sports and Health Technology</small></div></div>
-        <div class="footer-meta"><span>運動員管理系統</span><small>版本更新｜2026 年 11 月</small></div>
+        <div class="footer-product"><img src="assets/athlete-track-logo.png" alt="運動員管理系統 Logo" /><small>版本更新｜2026 年 11 月</small></div>
       </footer>
     </main>
   </div>

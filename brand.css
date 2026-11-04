@@ -12,6 +12,44 @@
   background: #fff;
 }
 
+.topbar-logo {
+  display: block;
+  width: 168px;
+  height: auto;
+  flex: 0 0 auto;
+}
+
+.footer-product {
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+  color: #a9bac3;
+  font-size: 11px;
+}
+
+.footer-product img {
+  display: block;
+  width: min(300px, 32vw);
+  height: auto;
+  border-radius: 12px;
+  background: #fff;
+  padding: 8px;
+}
+
+@media (max-width: 1000px) {
+  .topbar-logo { width: 132px; }
+}
+
+@media (max-width: 760px) {
+  .topbar-logo { width: 108px; }
+  .footer-product { justify-items: start; }
+  .footer-product img { width: min(300px, 100%); }
+}
+
+@media (max-width: 480px) {
+  .topbar-logo { width: 88px; }
+}
+
 .chart-axis-title { font-size: 10px; font-weight: 800; fill: #2e8061; }
 .chart-axis-label { font-size: 8px; fill: #77817c; }
 .chart-value-label { font-size: 8px; font-weight: 800; fill: #1e5d45; }
