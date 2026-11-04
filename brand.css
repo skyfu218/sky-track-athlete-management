@@ -36,6 +36,46 @@
   padding: 8px;
 }
 
+.site-footer {
+  justify-content: flex-start;
+  padding: 28px 34px;
+}
+
+.site-footer .footer-brand {
+  gap: 24px;
+}
+
+.site-footer .footer-mark {
+  display: block;
+  width: 112px;
+  height: 112px;
+  flex: 0 0 112px;
+  background: #fff url("assets/tshst-logo.png") left center / 701px 112px no-repeat;
+}
+
+.site-footer .footer-brand div {
+  gap: 5px;
+  padding: 7px 0 7px 24px;
+  border-left: 1px solid rgba(216, 245, 109, .35);
+}
+
+.site-footer .footer-brand strong {
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: .02em;
+}
+
+.site-footer .footer-brand span {
+  color: #a9bac3;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+.site-footer .footer-brand small {
+  font-size: 11px;
+}
+
 @media (max-width: 1000px) {
   .topbar-logo { width: 132px; }
 }
@@ -44,6 +84,11 @@
   .topbar-logo { width: 108px; }
   .footer-product { justify-items: start; }
   .footer-product img { width: min(300px, 100%); }
+  .site-footer .footer-brand { flex-direction: row; align-items: center; gap: 14px; }
+  .site-footer .footer-mark { width: 82px; height: 82px; flex-basis: 82px; background-size: 513px 82px; }
+  .site-footer .footer-brand div { padding-left: 14px; }
+  .site-footer .footer-brand strong { font-size: 12px; }
+  .site-footer .footer-brand span,.site-footer .footer-brand small { font-size: 9px; }
 }
 
 @media (max-width: 480px) {
