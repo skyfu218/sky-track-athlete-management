@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="brand.css?v=20261104-logo" />
   <link rel="stylesheet" href="jump-monitor.css" />
   <link rel="stylesheet" href="training-monitor.css" />
+  <link rel="stylesheet" href="prescription-builder.css?v=20261104-rx" />
   <link rel="stylesheet" href="trend.css" />
   <link rel="stylesheet" href="login.css" />
 </head>
@@ -70,7 +71,19 @@
 
       <section class="view" id="athletesView"><div class="section-toolbar"><div><span class="section-kicker">ROSTER</span><h2>選手名單</h2><p>管理選手基本資料與專項。</p></div><button class="btn primary" data-open="athlete">＋ 新增選手</button></div><div class="athlete-grid" id="athleteGrid"></div></section>
 
-      <section class="view" id="prescriptionsView"><div class="section-toolbar"><div><span class="section-kicker">TRAINING PLAN</span><h2>運動處方</h2><p>設定訓練內容、強度與教練注意事項。</p></div><button class="btn primary" data-open="prescription">＋ 建立處方</button></div><div class="filter-row"><input id="rxSearch" placeholder="搜尋處方或訓練內容" /><select id="rxStatus"><option value="all">全部狀態</option><option value="pending">待執行</option><option value="done">已完成</option></select></div><div id="prescriptionList" class="stack-list"></div></section>
+      <section class="view" id="prescriptionsView">
+        <div class="section-toolbar"><div><span class="section-kicker">TRAINING PLAN</span><h2>運動處方</h2><p>依選手專項快速產生社會組起始課表，再由教練調整內容。</p></div><button class="btn ghost" data-open="prescription">＋ 空白處方</button></div>
+        <article class="rx-builder">
+          <div class="rx-builder-head"><div><span class="section-kicker">PRESCRIPTION BUILDER</span><h3>專項運動處方建議器</h3><p>先選專項與訓練類別，系統會建立可直接修改的基礎課表。</p></div><span class="rx-standard-tag">社會組起始模板</span></div>
+          <div class="rx-builder-steps">
+            <section class="rx-step"><span class="rx-step-no">01</span><h4>選手與運動項目</h4><div class="rx-fields"><label>選手<select id="rxBuilderAthlete"></select></label><label>運動項目<select id="rxBuilderSport"></select></label></div></section>
+            <section class="rx-step"><span class="rx-step-no">02</span><h4>專項分類</h4><div class="rx-fields"><label>項目大類<select id="rxBuilderDivision"></select></label><label>專項類別<select id="rxBuilderCategory"></select></label><label>細部項目<select id="rxBuilderEvent"></select></label></div></section>
+            <section class="rx-step"><span class="rx-step-no">03</span><h4>訓練目標</h4><div class="rx-fields"><label>訓練類別<select id="rxBuilderFocus"><option value="strength">肌力訓練</option><option value="technique">技術訓練</option><option value="speed">速度訓練</option><option value="endurance">耐力訓練</option><option value="recovery">恢復訓練</option></select></label><label>預計日期<input type="date" id="rxBuilderDate" /></label><label>建議強度<select id="rxBuilderIntensity"><option>低</option><option selected>中</option><option>高</option></select></label></div></section>
+          </div>
+          <div class="rx-draft"><div class="rx-draft-head"><div><span class="section-kicker">EDITABLE DRAFT</span><h4>可編輯處方草稿</h4></div><button class="btn ghost" id="rxResetTemplate" type="button">重新套用模板</button></div><div class="rx-draft-grid"><label>處方主題<input id="rxBuilderTitle" /></label><label>訓練目標<input id="rxBuilderGoal" /></label><label class="full">訓練內容（每行一項，可直接修改）<textarea id="rxBuilderExercises"></textarea></label><label class="full">教練注意事項<textarea id="rxBuilderNote"></textarea></label></div><div class="rx-builder-actions"><p>模板是教練規劃的起點；請依賽季階段、訓練年齡、傷病史與當日狀態調整。</p><button class="btn primary" id="rxSaveTemplate" type="button">儲存為選手處方</button></div></div>
+        </article>
+        <div class="rx-library-head"><div><span class="section-kicker">PRESCRIPTION LIBRARY</span><h3>已建立的運動處方</h3></div><div class="filter-row"><input id="rxSearch" placeholder="搜尋處方或訓練內容" /><select id="rxStatus"><option value="all">全部狀態</option><option value="pending">待執行</option><option value="done">已完成</option></select></div></div><div id="prescriptionList" class="stack-list"></div>
+      </section>
 
       <section class="view" id="logsView">
         <div class="log-live-hero"><div><span class="live-label"><i></i> DAILY CHECK-IN</span><h2>一個時段，多個項目，逐項累加。</h2><p>先選日期與上午／下午／晚上，再由工作人員替全隊逐項加入時間與 RPE。</p></div><div class="jump-progress"><strong id="logCompletedCount">0</strong><span id="logProgressLabel">/ 11 已登錄</span></div></div>
